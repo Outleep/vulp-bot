@@ -30,6 +30,9 @@ class Setup:
 
         # Configurações do BOT
         self.BOT_TOKEN = self.get_env("BOT_TOKEN", type_value=str)
+        self.BOT_OWNER_ID = self.get_env("BOT_OWNER_ID", type_value=int)
+        self.BOT_LOG_CHAT_ID = self.get_env("BOT_LOG_CHAT_ID", type_value=int)
+        self.BOT_GUILD_ID = self.get_env("BOT_GUILD_ID", type_value=int)
 
     def get_env(
         self,
@@ -47,6 +50,10 @@ class Setup:
         
         Returns:
             (TypeVar): The value of the environment variable
+    
+        Raises:
+            ValueError: If the environment variable is not set,
+                or if the value is not of the expected type
         """
 
         try:
