@@ -14,7 +14,7 @@ class ComunityAdapter(ComunityPort, UtilsBot):
     """
 
     async def command_help(self, chat_id: int | None) -> discord.Embed | None:
-
+        #raise ValueError("Teste error")
         embed = discord.Embed(title="Ajuda", color=discord.Color.green())
         embed.description = "Comandos do bot"
         if chat_id:

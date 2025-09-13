@@ -8,6 +8,7 @@ import discord
 from discord import Object
 from discord.ext import commands
 
+from .deps.security import verify_owner_bot
 from integrations.bot_client import client
 from setup import setup
 
@@ -23,6 +24,7 @@ async def load_cogs():
 
 
 @client.command(name="csync")
+@verify_owner_bot
 async def sync_commands(ctx: commands.Context):
     """
     Command for sync tree bot commands
@@ -45,6 +47,16 @@ async def sync_commands(ctx: commands.Context):
         )
 
     await ctx.send(embed=embed)
+
+
+@client.command(name="cclear", description="Limpa a arvore de comandos do bot")
+@verify_owner_bot
+async def clear_commands(ctx: commands.Context):
+    """
+    Command for clear tree bot commands
+    """
+    guild = Object(id=ctx.guild.id)
+    await client.tree.clear_commands(guild=guild)
 
 
 async def run_bot():

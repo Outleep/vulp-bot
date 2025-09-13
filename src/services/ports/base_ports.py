@@ -37,6 +37,7 @@ class BaseBotPort(ABC):
                 Wrapper for handle errors
                 """
                 try:
+                    print("wrapper")
                     return await attr(*args, **kwargs)
 
                 except BotException as err:
@@ -55,6 +56,7 @@ class BaseBotPort(ABC):
                         await channel.send(embed=embed)
 
                 except Exception as err:  # pylint: disable=broad-exception-caught
+                    print("exec")
                     logger.error(
                         "Falha ao executar comando: " + str(err),
                         traceback=traceback.format_exc(),
