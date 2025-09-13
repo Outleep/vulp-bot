@@ -8,9 +8,9 @@ import discord
 from discord import Object
 from discord.ext import commands
 
-from .deps.security import verify_owner_bot
 from integrations.bot_client import client
 from setup import setup
+from .deps.security import verify_owner_bot
 
 
 async def load_cogs():
@@ -31,6 +31,7 @@ async def sync_commands(ctx: commands.Context):
     """
 
     guild = Object(id=ctx.guild.id)
+    await load_cogs()
     commands_loaded = await client.tree.sync(guild=guild)
 
     embed = discord.Embed(
@@ -49,14 +50,29 @@ async def sync_commands(ctx: commands.Context):
     await ctx.send(embed=embed)
 
 
-@client.command(name="cclear", description="Limpa a arvore de comandos do bot")
+@client.command(name="cclear", description="Limpa a árvore de comandos do bot")
 @verify_owner_bot
 async def clear_commands(ctx: commands.Context):
     """
-    Command for clear tree bot commands
+    Comando que limpa todos os slash commands do bot
     """
-    guild = Object(id=ctx.guild.id)
-    await client.tree.clear_commands(guild=guild)
+    # Limpa comandos globais
+    client.tree.clear_commands(guild=None)
+
+    # Limpa comandos da guild atual
+    guild = discord.Object(id=ctx.guild.id)
+    client.tree.clear_commands(guild=guild)
+
+    # Sincroniza remoção
+    await client.tree.sync(guild=guild)
+    await client.tree.sync()
+
+    embed = discord.Embed(
+        title="Aviso",
+        color=discord.Color.green(),
+        description="Árvore de comandos limpa! (globais e desta guild)"
+    )
+    await ctx.send(embed=embed)
 
 
 async def run_bot():

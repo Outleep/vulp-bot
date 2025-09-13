@@ -19,7 +19,10 @@ class HelpCog(commands.Cog):
         self.bot = bot
         self.service = ComunityAdapter(bot)
 
-    @app_commands.command(name="ajuda", description="Visualizar comandos e informações uteis do servidor.")
+    @app_commands.command(
+        name="ajuda",
+        description="Visualizar comandos e informações uteis do servidor."
+    )
     async def help(self, interaction: Interaction):
         """
         Send help message
