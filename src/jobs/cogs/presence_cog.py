@@ -14,7 +14,6 @@ from loguru import logger
 from integrations.bot_client import client
 
 
-
 class PresenceCog(Cog):
     """
     Presence cogs

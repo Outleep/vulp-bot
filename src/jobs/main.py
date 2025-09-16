@@ -2,7 +2,6 @@
 Jobs handler
 """
 
-
 import sys
 from pathlib import Path
 
