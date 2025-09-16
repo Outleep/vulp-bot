@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "vulp-bot"
+version = "0.1.0"
+description = "Bot oficial do servidor Outleep"
+authors = ["Emerson Silva"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+loguru = "^0.7.3"
+discord-py = "^2.6.3"
+anyio = "^4.10.0"
+clockparts = "^0.1.56"
+sqlmodel = "^0.0.24"
+aiosqlite = "^0.21.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
