@@ -2,4 +2,4 @@
 Module for import ports
 """
 
-from .comunity import ComunityPort
+from .comunity import IComunity

@@ -4,11 +4,10 @@ Utils logic for discord Bot
 
 import discord
 
-from services.ports.base_ports import BaseBotPort
 from .exceptions import BotException
 
 
-class UtilsBot(BaseBotPort):
+class UtilsBot():
     """
     Class for utils logic for discord Bot
     """

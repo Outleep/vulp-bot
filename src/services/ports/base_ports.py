@@ -13,10 +13,11 @@ import discord
 from discord.ext.commands import Bot
 
 from services.utils.exceptions import BotException
+from services.utils.bot_utils import UtilsBot
 from setup import setup
 
 
-class BaseBotPort(ABC):
+class BaseBotPort(UtilsBot, ABC):
     """
     Ports for comunity
     """
@@ -37,7 +38,6 @@ class BaseBotPort(ABC):
                 Wrapper for handle errors
                 """
                 try:
-                    print("wrapper")
                     return await attr(*args, **kwargs)
 
                 except BotException as err:

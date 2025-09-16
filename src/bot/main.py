@@ -10,6 +10,7 @@ from discord.ext import commands
 
 from integrations.bot_client import client
 from setup import setup
+from database.repositories.calendar_repo import CalendarRepo
 from .deps.security import verify_owner_bot
 
 
@@ -74,6 +75,19 @@ async def clear_commands(ctx: commands.Context):
     )
     await ctx.send(embed=embed)
 
+
+@client.command(name="ctest")
+async def test_command(ctx: commands.Context):
+    """
+    Teste commands
+    """
+
+    async with setup.get_async_session() as session:
+        repo = CalendarRepo(session)
+        calendars = await repo.get_all()
+    
+    print(calendars)
+    return await ctx.send("Teste")
 
 async def run_bot():
     """

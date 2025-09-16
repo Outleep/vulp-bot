@@ -5,16 +5,14 @@ Ports for comunity logic
 from abc import ABC, abstractmethod
 
 import discord
-from discord.ext.commands import Bot
+
+from .base_ports import BaseBotPort
 
 
-class ComunityPort(ABC):
+class IComunity(BaseBotPort, ABC):
     """
     Ports for comunity
     """
-
-    def __init__(self, client: Bot):
-        self.client = client
 
     @abstractmethod
     async def command_help(self, chat_id: int | None) -> discord.Embed | None:

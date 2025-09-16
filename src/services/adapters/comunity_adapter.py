@@ -4,11 +4,10 @@ Module for adapter comunity Port
 
 import discord
 
-from services.ports import ComunityPort
-from services.utils import UtilsBot
+from services.ports import IComunity
 
 
-class ComunityAdapter(ComunityPort, UtilsBot):
+class ComunityAdapter(IComunity):
     """
     Adapter for ComunityPort
     """

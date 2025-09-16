@@ -4,7 +4,15 @@
 Module for import setup
 """
 
-from typing import TypeVar, Type
+import os
+from typing import TypeVar, Type, AsyncGenerator
+from contextlib import asynccontextmanager
+
+from database.tables import *
+from sqlmodel import SQLModel
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, AsyncSession
+from sqlalchemy import create_engine
+
 from dotenv import dotenv_values
 from loguru import logger
 
@@ -26,6 +34,7 @@ class Setup:
             API_DESCRIPTION: descricao da api
         """
 
+        self.engine = None
         self.env = dotenv_values(".env")
 
         # Configurações do BOT
@@ -33,6 +42,54 @@ class Setup:
         self.BOT_OWNER_ID = self.get_env("BOT_OWNER_ID", type_value=int)
         self.BOT_LOG_CHAT_ID = self.get_env("BOT_LOG_CHAT_ID", type_value=int)
         self.BOT_GUILD_ID = self.get_env("BOT_GUILD_ID", type_value=int)
+
+    def create_database_file(self):
+        """
+        Create the database file
+        """
+
+        if not os.path.exists("resources/vulp.db"):
+            with open("resources/vulp.db", "w", encoding="utf-8"): pass
+
+    def create_db_engine(self) -> AsyncEngine:
+        """
+        Create SQLAlchemy engine
+        """
+        if self.engine is not None:
+            return self.engine
+
+        self.create_database_file()  # Create the database file
+        self.engine = create_async_engine("sqlite+aiosqlite:///resources/vulp.db")
+        sync_engine = create_engine("sqlite:///resources/vulp.db")
+        SQLModel.metadata.create_all(sync_engine)
+
+        return self.engine
+
+    @asynccontextmanager
+    async def get_async_session(self) -> AsyncGenerator[AsyncSession, None]:
+        """
+        Get async session
+        """
+
+        engine = self.create_db_engine()
+        async_session = AsyncSession(
+            engine,
+            expire_on_commit=False,
+            autoflush=True
+        )
+
+        try:
+            yield async_session
+
+        except Exception as err:
+            await async_session.rollback()
+            raise err
+
+        else:
+            await async_session.commit()
+
+        finally:
+            await async_session.close()
 
     def get_env(
         self,
@@ -82,3 +139,4 @@ class Setup:
 
 
 setup = Setup()
+setup.create_db_engine()
