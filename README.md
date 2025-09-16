@@ -1,6 +1,6 @@
 ### Vulp Bot — Bot oficial da comunidade Outleep
 
-<img width="970" height="970" alt="vulp-modified" src="https://github.com/user-attachments/assets/e8b00535-8bca-4fd4-932c-928e0ca739ef" />
+<img width="280" height="280" alt="vulp-modified" src="https://github.com/user-attachments/assets/e8b00535-8bca-4fd4-932c-928e0ca739ef" />
 
 Bot do Discord para ajudar, administrar e gerenciar a comunidade Outleep com foco em qualidade, organização e extensibilidade.
 
