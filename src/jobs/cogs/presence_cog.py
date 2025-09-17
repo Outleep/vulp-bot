@@ -44,7 +44,7 @@ class PresenceCog(Cog):
             "Odeio acordar noite.",
         ]
 
-    @Cog.task(schedule=timedelta(minutes=5))
+    @Cog.task(schedule=timedelta(seconds=5))
     async def update_presence(self):
         """
         Schedule for update discord presence based in actual time of day
@@ -64,7 +64,7 @@ class PresenceCog(Cog):
                 new_presence = choice(self.night_messages)
 
             case _:
-                new_presence = "Espero que tenha algo de especial hoje"
+                new_presence = choice(self.night_messages)
 
         if self.last_presence is None or (self.last_presence != new_presence):
             logger.info("Atualizando presença para: " + new_presence)
