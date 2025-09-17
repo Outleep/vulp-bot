@@ -9,7 +9,6 @@ from discord.ext import commands
 from loguru import logger
 
 from bot.ux.utils.cform import CForm
-from services.adapters.comunity_adapter import ComunityAdapter
 from setup import setup as settings
 
 
@@ -20,7 +19,6 @@ class ComplaintCog(commands.Cog):
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.service = ComunityAdapter(bot)
 
     @app_commands.command(
         name="denuncia",
