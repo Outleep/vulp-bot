@@ -27,7 +27,7 @@ class HelpCog(commands.Cog):
         """
         Send help message
         """
-        embed = await self.service.command_help(None)
+        embed = await self.service.command_help()
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 async def setup(bot: commands.Bot):

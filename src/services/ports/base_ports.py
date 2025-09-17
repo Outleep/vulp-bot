@@ -6,6 +6,7 @@ from functools import wraps
 from inspect import iscoroutinefunction
 from abc import ABC
 import traceback
+import asyncio
 
 from loguru import logger
 
@@ -44,7 +45,8 @@ class BaseBotPort(UtilsBot, ABC):
                     logger.warning("Comando invalido foi encontrado: " + err.reason)
 
                     if err.chat_id or setup.BOT_LOG_CHAT_ID:
-                        channel = self.client.get_channel(err.chat_id)
+                        channel = self.client.get_channel(err.chat_id or setup.BOT_LOG_CHAT_ID)
+
                         channel = channel if channel else self.client.get_channel(setup.BOT_LOG_CHAT_ID)
 
                         embed = discord.Embed(
@@ -53,7 +55,10 @@ class BaseBotPort(UtilsBot, ABC):
                             title="Comando invalido",
                         )
 
-                        await channel.send(embed=embed)
+                        msg = await channel.send(embed=embed)
+                        if err.chat_id:
+                            await asyncio.sleep(3)
+                            await msg.delete()
 
                 except Exception as err:  # pylint: disable=broad-exception-caught
                     print("exec")

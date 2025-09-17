@@ -4,6 +4,7 @@ Utils logic for discord Bot
 
 import discord
 
+from src.integrations.bot_client import client
 from .exceptions import BotException
 
 
@@ -26,7 +27,7 @@ class UtilsBot():
             If channel not found, return custom Exception
         """
 
-        channel = self.client.get_channel(chat_id)
+        channel = client.get_channel(chat_id)
         if not channel:
             raise BotException("Canal não foi encontrado")
 

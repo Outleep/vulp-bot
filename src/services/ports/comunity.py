@@ -15,7 +15,7 @@ class IComunity(BaseBotPort, ABC):
     """
 
     @abstractmethod
-    async def command_help(self, chat_id: int | None) -> discord.Embed | None:
+    async def command_help(self) -> discord.Embed | None:
         """
         Command for help discord commands
 
@@ -26,7 +26,7 @@ class IComunity(BaseBotPort, ABC):
         """
 
     @abstractmethod
-    async def command_complaint(self, chat_id: int | None) -> discord.Embed | None:
+    async def command_complaint(self) -> discord.Embed | None:
         """
         Command for complaint server
 

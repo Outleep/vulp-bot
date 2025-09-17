@@ -12,24 +12,15 @@ class ComunityAdapter(IComunity):
     Adapter for ComunityPort
     """
 
-    async def command_help(self, chat_id: int | None) -> discord.Embed | None:
-        #raise ValueError("Teste error")
+    async def command_help(self) -> discord.Embed | None:
+
         embed = discord.Embed(title="Ajuda", color=discord.Color.green())
         embed.description = "Comandos do bot"
-        if chat_id:
-            channel = self._get_channel(chat_id)
-            await channel.send(embed=embed)
-            return
-
         return embed
 
-    async def command_complaint(self, chat_id: int | None) -> discord.Embed | None:
+    async def command_complaint(self) -> discord.Embed | None:
 
-        embed = discord.Embed(title="Reclamar", color=discord.Color.green())
+        embed = discord.Embed(title="Mensagem enviada no seu privado", color=discord.Color.yellow())
         embed.description = "Reclame aqui"
-        if chat_id:
-            channel = self._get_channel(chat_id)
-            await channel.send(embed=embed)
-            return
 
         return embed
