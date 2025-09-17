@@ -2,7 +2,7 @@
 Module contains interfaces for bookmarks handler
 """
 
-from typing import Callable, List, Tuple, Coroutine
+from typing import Coroutine
 from abc import ABC, abstractmethod
 
 import discord

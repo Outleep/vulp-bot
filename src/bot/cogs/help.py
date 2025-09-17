@@ -6,7 +6,6 @@ from discord import app_commands, Interaction, Object
 from discord.ext import commands
 from loguru import logger
 
-from services.adapters.comunity_adapter import ComunityAdapter
 from setup import setup as settings
 
 
@@ -17,7 +16,6 @@ class HelpCog(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.service = ComunityAdapter(bot)
 
     @app_commands.command(
         name="ajuda",
@@ -27,8 +25,6 @@ class HelpCog(commands.Cog):
         """
         Send help message
         """
-        embed = await self.service.command_help(None)
-        await interaction.response.send_message(embed=embed, ephemeral=True)
 
 async def setup(bot: commands.Bot):
     """

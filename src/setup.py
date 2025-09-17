@@ -8,13 +8,13 @@ import os
 from typing import TypeVar, Type, AsyncGenerator
 from contextlib import asynccontextmanager
 
-from database.tables import *
+from dotenv import dotenv_values
+from loguru import logger
+
 from sqlmodel import SQLModel
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, AsyncSession
 from sqlalchemy import create_engine
-
-from dotenv import dotenv_values
-from loguru import logger
+from database.tables import *  # pylint: disable=unused-wildcard-import
 
 
 T = TypeVar("T")
@@ -49,7 +49,8 @@ class Setup:
         """
 
         if not os.path.exists("resources/vulp.db"):
-            with open("resources/vulp.db", "w", encoding="utf-8"): pass
+            with open("resources/vulp.db", "w", encoding="utf-8"):
+                pass
 
     def create_db_engine(self) -> AsyncEngine:
         """
