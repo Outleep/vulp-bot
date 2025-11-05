@@ -22,29 +22,29 @@ class PresenceCog(Cog):
     def __init__(self):
         self.last_presence = None
         self.morning_messages = [
-            "Bom dia",
-            "Que manhã fria",
-            "Espero que o dia seja bom",
-            "Academia no frio?",
-            "Odeio acordar cedo",
+            "O sol nasce, mas algo espreita no silêncio da manhã...",
+            "Frio que corta, como se guardasse segredos não ditos.",
+            "Que este dia revele mais do que simples horas.",
+            "Acordar cedo... ou ser acordado pelo próprio destino?",
+            "Há algo estranho no ar desta manhã, você sente?",
         ]
 
         self.afternoon_messages = [
-            "Boa tarde",
-            "Que tarde fria",
-            "Espero que o dia seja bom",
-            "Odeio acordar tarde",
+            "O tempo se arrasta, e a tarde guarda mistérios ocultos.",
+            "Frio na tarde... ou apenas um aviso velado?",
+            "Que esta tarde não seja comum, mas um presságio.",
+            "A tarde desperta sombras que poucos percebem.",
         ]
 
         self.night_messages = [
-            "Boa noite",
-            "Que noite fria",
-            "Espero que o dia seja bom",
-            "Academia de noite? Nao.",
-            "Odeio acordar noite.",
+            "A noite sussurra segredos que não ousamos repetir.",
+            "O frio da noite... ou apenas o mundo segurando a respiração?",
+            "Que a escuridão traga respostas — ou mais perguntas.",
+            "Alguns lugares não devem ser visitados...",
+            "Acordar à noite... mas será que foi você quem acordou?",
         ]
 
-    @Cog.task(schedule=timedelta(seconds=5))
+    @Cog.task(schedule=timedelta(minutes=5))
     async def update_presence(self):
         """
         Schedule for update discord presence based in actual time of day
