@@ -43,6 +43,10 @@ class Setup:
         self.BOT_LOG_CHAT_ID = self.get_env("BOT_LOG_CHAT_ID", type_value=int)
         self.BOT_GUILD_ID = self.get_env("BOT_GUILD_ID", type_value=int)
 
+        # Configurações de Webhook
+        self.COMMUNITY_CALENDAR_WEBHOOK_URL = self.get_env("COMMUNITY_CALENDAR_WEBHOOK_URL", type_value=str)
+        self.COMMUNITY_CALENDAR_WEBHOOK_MESSAGE_ID = self.get_env("COMMUNITY_CALENDAR_WEBHOOK_MESSAGE_ID", type_value=int)
+
     def create_database_file(self):
         """
         Create the database file
